@@ -13,10 +13,11 @@ class ArticlesController extends AppController
 
     /**
      * Index method
+     * Using show list articles and result search
      *
      * @return \Cake\Network\Response|null
      */
-    public function index($search = null)
+    public function index()
     {
         if ($this->request->is('post')) {
             if (!empty($this->request->data) && isset($this->request->data)) {
@@ -46,7 +47,7 @@ class ArticlesController extends AppController
             ];
         }
         $articles = $this->paginate($this->Articles);
-
+        
         $this->set(compact('articles'));
         $this->set('_serialize', ['articles']);
     }
