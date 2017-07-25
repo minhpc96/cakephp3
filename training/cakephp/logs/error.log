@@ -7168,3 +7168,35 @@ Stack Trace:
 2017-07-24 09:09:49 Warning: DebugKit not enabled. You need to either install pdo_sqlite, or define the "debug_kit" connection name.
 2017-07-24 09:09:57 Warning: DebugKit not enabled. You need to either install pdo_sqlite, or define the "debug_kit" connection name.
 2017-07-24 09:10:05 Warning: DebugKit not enabled. You need to either install pdo_sqlite, or define the "debug_kit" connection name.
+2017-07-24 10:23:26 Warning: DebugKit not enabled. You need to either install pdo_sqlite, or define the "debug_kit" connection name.
+2017-07-24 10:32:10 Warning: DebugKit not enabled. You need to either install pdo_sqlite, or define the "debug_kit" connection name.
+2017-07-24 10:32:23 Warning: DebugKit not enabled. You need to either install pdo_sqlite, or define the "debug_kit" connection name.
+2017-07-24 10:32:55 Warning: DebugKit not enabled. You need to either install pdo_sqlite, or define the "debug_kit" connection name.
+2017-07-24 10:33:01 Warning: DebugKit not enabled. You need to either install pdo_sqlite, or define the "debug_kit" connection name.
+2017-07-24 10:33:02 Error: [PDOException] SQLSTATE[HY000] [2002] Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
+Request URL: /cakephp/blog
+Referer URL: http://192.168.56.56:8080/cakephp/blog
+Stack Trace:
+#0 /var/www/html/cakephp/vendor/cakephp/cakephp/src/Database/Driver/PDODriverTrait.php(48): PDO->__construct('mysql:host=loca...', 'root', 'abc123', Array)
+#1 /var/www/html/cakephp/vendor/cakephp/cakephp/src/Database/Driver/Mysql.php(90): Cake\Database\Driver\Mysql->_connect('mysql:host=loca...', Array)
+#2 /var/www/html/cakephp/vendor/cakephp/cakephp/src/Database/Schema/BaseSchema.php(45): Cake\Database\Driver\Mysql->connect()
+#3 /var/www/html/cakephp/vendor/cakephp/cakephp/src/Database/Dialect/MysqlDialectTrait.php(63): Cake\Database\Schema\BaseSchema->__construct(Object(Cake\Database\Driver\Mysql))
+#4 /var/www/html/cakephp/vendor/cakephp/cakephp/src/Database/Schema/Collection.php(52): Cake\Database\Driver\Mysql->schemaDialect()
+#5 /var/www/html/cakephp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(43): Cake\Database\Schema\Collection->__construct(Object(Cake\Database\Connection))
+#6 /var/www/html/cakephp/vendor/cakephp/cakephp/src/Database/Connection.php(315): Cake\Database\Schema\CachedCollection->__construct(Object(Cake\Database\Connection), true)
+#7 /var/www/html/cakephp/vendor/cakephp/cakephp/src/ORM/Table.php(422): Cake\Database\Connection->schemaCollection()
+#8 /var/www/html/cakephp/vendor/cakephp/cakephp/src/ORM/Query.php(173): Cake\ORM\Table->schema()
+#9 /var/www/html/cakephp/vendor/cakephp/cakephp/src/ORM/Query.php(131): Cake\ORM\Query->addDefaultTypes(Object(App\Model\Table\ArticlesTable))
+#10 /var/www/html/cakephp/vendor/cakephp/cakephp/src/ORM/Table.php(1232): Cake\ORM\Query->__construct(Object(Cake\Database\Connection), Object(App\Model\Table\ArticlesTable))
+#11 /var/www/html/cakephp/vendor/cakephp/cakephp/src/ORM/Table.php(935): Cake\ORM\Table->query()
+#12 /var/www/html/cakephp/vendor/cakephp/cakephp/src/Controller/Component/PaginatorComponent.php(166): Cake\ORM\Table->find('all', Array)
+#13 /var/www/html/cakephp/vendor/cakephp/cakephp/src/Controller/Controller.php(689): Cake\Controller\Component\PaginatorComponent->paginate(Object(App\Model\Table\ArticlesTable), Array)
+#14 /var/www/html/cakephp/src/Controller/ArticlesController.php(48): Cake\Controller\Controller->paginate(Object(App\Model\Table\ArticlesTable))
+#15 [internal function]: App\Controller\ArticlesController->index()
+#16 /var/www/html/cakephp/vendor/cakephp/cakephp/src/Controller/Controller.php(430): call_user_func_array(Array, Array)
+#17 /var/www/html/cakephp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#18 /var/www/html/cakephp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\ArticlesController))
+#19 /var/www/html/cakephp/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#20 {main}
+
+
