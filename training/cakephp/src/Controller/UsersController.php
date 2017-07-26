@@ -1,5 +1,4 @@
 <?php
-// src/Controller/UsersController.php
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -11,60 +10,59 @@ use Cake\Mailer\Email;
  *
  * @property \App\Model\Table\UsersTable $Users
  */
-
 class UsersController extends AppController
 {
-    /*
+
+    /**
      * beforeFilter method
      * 
      * @param Event $event
      * @return Auth
      */
-
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
         //Cho phép thêm, đăng xuất và xem trang check
         $this->Auth->allow(['add', 'logout', 'check',]);
     }
-    /*
+
+    /**
      * Index method
      * 
      * @return null
      */
-
     public function index()
     {
         $this->set('users', $this->Users->find('all'));
     }
-    /*
+
+    /**
      * View method
      * 
      * @param $id Users id
      * @return null
      */
-
     public function view($id)
     {
         $user = $this->Users->get($id);
         $this->set(compact('user'));
     }
-    /*
+
+    /**
      * Check method to do verify account
      * 
      * @return null
      */
-
     public function check()
     {
         $this->set(compact('user'));
     }
-    /*
+
+    /**
      * Send email method
      * 
      * @return $email
      */
-
     public function sendEmail()
     {
         $email = new Email();
@@ -79,12 +77,12 @@ class UsersController extends AppController
         $content .= "\n Password: " . $this->request->data['password'];
         return $email->send($content);
     }
-    /*
+
+    /**
      * Add method
      * 
      * @return Redirect on successful
      */
-
     public function add()
     {
         $user = $this->Users->newEntity();
@@ -94,7 +92,7 @@ class UsersController extends AppController
             //Check validation
             if (!$user->errors()) {
                 /* @var $sendEmail type */
-                
+
                 //Check save user: redirect check on successful
                 if ($this->Users->save($user)) {
                     $this->sendEmail();
@@ -106,12 +104,12 @@ class UsersController extends AppController
         }
         $this->set('user', $user);
     }
-    /*
+
+    /**
      * Change password method
      * 
      * @return Redirect on successful
      */
-
     public function change()
     {
         $user = $this->Users->get($this->Auth->user('id'));
@@ -131,13 +129,13 @@ class UsersController extends AppController
             }
         }
     }
-    /*
+
+    /**
      * Delete method
      * 
      * @param $id Users id
      * @return null, redirect on successful
      */
-
     public function delete($id = null)
     {
         $this->request->allowMethod('post', 'delete');
@@ -149,12 +147,12 @@ class UsersController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
-    /*
+
+    /**
      * Login method
      * 
      * @return Redirect on successful
      */
-
     public function login()
     {
         if ($this->request->is('post')) {
@@ -166,24 +164,24 @@ class UsersController extends AppController
             $this->Flash->error(__('Invalid username or password, try again'));
         }
     }
-    /*
+
+    /**
      * Logout method
      * 
      * @return Redirect on successful
      */
-
     public function logout()
     {
         $this->Flash->success('You has been logged out.');
         return $this->redirect($this->Auth->logout());
     }
-    /*
+
+    /**
      * IsAuthorized method
      * 
      * @param $user Users user
      * @return boolean
      */
-
     public function isAuthorized($user)
     {
         // user login can view and change user

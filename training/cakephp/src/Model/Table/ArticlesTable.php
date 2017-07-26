@@ -60,6 +60,12 @@ class ArticlesTable extends Table
         return $validator;
     }
 
+    /**
+     * Check a articlesId is owned by user login
+     * 
+     * @param  $articlesId, $userId id of category and id of user logged
+     * @return boole true if this articles had been create by this user
+     */
     public function isOwnedBy($articleId, $userId)
     {
         return $this->exists(['id' => $articleId, 'user_id' => $userId]);

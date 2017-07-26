@@ -13,11 +13,10 @@ class ArticlesController extends AppController
 
     /**
      * Index method
-     * Using show list articles and result search
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
+    public function index($search = null)
     {
         if ($this->request->is('post')) {
             if (!empty($this->request->data) && isset($this->request->data)) {
@@ -47,7 +46,7 @@ class ArticlesController extends AppController
             ];
         }
         $articles = $this->paginate($this->Articles);
-        
+
         $this->set(compact('articles'));
         $this->set('_serialize', ['articles']);
     }
@@ -68,12 +67,12 @@ class ArticlesController extends AppController
         $this->set('article', $article);
         $this->set('_serialize', ['article']);
     }
-    /*
+
+    /**
      * Add method
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-
     public function add()
     {
         $article = $this->Articles->newEntity();
@@ -136,21 +135,21 @@ class ArticlesController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
-    /*
+
+    /**
      * Check is authorize
      * 
      * @param $user User
      * @return bool
      */
-
     public function isAuthorized($user)
     {
-// All registered users can add articles
+        // All registered users can add articles
         if (in_array($this->request->param('action'), ['add', 'search'])) {
             return true;
         }
 
-// The owner of an article can edit and delete it
+        // The owner of an article can edit and delete it
         if (in_array($this->request->param('action'), ['edit', 'delete'])) {
             $articleId = (int) $this->request->param('pass.0');
             if ($this->Articles->isOwnedBy($articleId, $user['id'])) {

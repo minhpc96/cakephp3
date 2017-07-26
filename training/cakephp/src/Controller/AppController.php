@@ -63,13 +63,13 @@ class AppController extends Controller
             ]
         ]);
     }
-    /*
+
+    /**
      * IsAuthorized method
      * 
      * @param Users $user
      * @return bool
      */
-
     public function isAuthorized($user)
     {
         if (isset($user['role']) && $user['role'] === 'admin') {
@@ -77,13 +77,13 @@ class AppController extends Controller
         }
         return false;
     }
-    /*
+
+    /**
      * beforeFilter method
      * 
      * @param $event Event
      * @return null
      */
-
     public function beforeFilter(Event $event)
     {
         $this->Auth->allow(['index', 'display', 'view', 'search']);

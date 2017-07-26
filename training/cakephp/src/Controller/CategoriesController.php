@@ -54,6 +54,7 @@ class CategoriesController extends AppController
         $category = $this->Categories->newEntity();
         if ($this->request->is('post')) {
             $category = $this->Categories->patchEntity($category, $this->request->data);
+            $category->user_id = $this->Auth->user('id');
             if ($this->Categories->save($category)) {
                 $this->Flash->success(__('The category has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -109,5 +110,29 @@ class CategoriesController extends AppController
             $this->Flash->error(__('The category could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Check is authorize
+     * 
+     * @param $user User
+     * @return bool
+     */
+    public function isAuthorized($user)
+    {
+        // All registered users can add articles
+        if (in_array($this->request->param('action'), ['add'])) {
+            return true;
+        }
+
+        // The owner of an article can edit and delete it
+        if (in_array($this->request->param('action'), ['edit', 'delete'])) {
+            $categoryId = (int) $this->request->param('pass.0');
+            if ($this->Categories->isOwnedBy($categoryId, $user['id'])) {
+                return true;
+            }
+        }
+
+        return parent::isAuthorized($user);
     }
 }

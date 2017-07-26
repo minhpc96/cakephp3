@@ -7,13 +7,13 @@ use Cake\Auth\DefaultPasswordHasher;
 
 class UsersTable extends Table
 {
-    /*
+
+    /**
      * validation data when insert into Users Table
      * 
      * @param Validator $validator
      * @return $validator
      */
-
     public function validationDefault(Validator $validator)
     {
         $validator = new Validator();
@@ -60,13 +60,13 @@ class UsersTable extends Table
 
         return $validator;
     }
-    /*
+
+    /**
      * Validation data when change password
      * 
      * @param $validator Validator
      * @return $validator
      */
-
     public function validationPassword(Validator $validator)
     {
         $validator
@@ -75,8 +75,7 @@ class UsersTable extends Table
                 'rule' => function($value, $context) {
                     $user = $this->get($context['data']['id']);
                     if ($user) {
-                        if ((new DefaultPasswordHasher)->check($value, $user->password) 
-                            || $user->password == $context['data']['oldpassword']) {
+                        if ((new DefaultPasswordHasher)->check($value, $user->password) || $user->password == $context['data']['oldpassword']) {
                             return true;
                         }
                     }
@@ -100,13 +99,13 @@ class UsersTable extends Table
         ;
         return $validator;
     }
-    /*
+
+    /**
      * is owned by method
      * 
      * @param $userId
      * @return bool
      */
-
     public function isOwnedBy($userId)
     {
         return $this->exists(['id' => $userId]);

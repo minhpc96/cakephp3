@@ -88,4 +88,15 @@ class CategoriesTable extends Table
         $rules->add($rules->existsIn(['parent_id'], 'ParentCategories'));
         return $rules;
     }
+    
+    /**
+     * Check a category is owned by user login
+     * 
+     * @param  $categoryId, $userId id of category and id of user logged
+     * @return boole true if this category had been create by this user
+     */
+    public function isOwnedBy($categoryId, $userId)
+    {
+        return $this->exists(['id' => $categoryId, 'user_id' => $userId]);
+    }
 }

@@ -11,13 +11,13 @@ class User extends Entity
         '*' => true,
         'id' => false
     ];
-    /*
+
+    /**
      * Set password method
      * 
      * @param $password
      * @return password hashed
      */
-
     protected function _setPassword($password)
     {
         if (strlen($password) > 0) {
